@@ -1,13 +1,24 @@
-#launch ec2 instance
-resource "aws_instance" "ubuntu" {
-  ami           = "ami-080e1f13689e07408"
-  instance_type = "t2.micro"
-  # the VPC subnet
-  subnet_id = aws_subnet.team-public.id
-  # the security group
-  vpc_security_group_ids = [aws_security_group.allow_all.id]
+#Creating EC2 instance in public subnet
+resource "aws_instance" "public-server" {
+    ami = "ami-051f8a213df8bc089" #amazon linux ami
+    instance_type = "t2.micro"
+    subnet_id = aws_subnet.team-public.id
+    security_groups = [aws_security_group.allow_all.id]
+    key_name = "moffo-key"
+    tags = {
+      Name ="public-server"
+    }
   
-  tags = {
-    Name = "team-server"
-  }
-  }
+}
+
+# Creating EC2 instance in private subnet
+resource "aws_instance" "private-server" {
+    ami = "ami-051f8a213df8bc089" #Amazon Linux
+    instance_type = "t2.micro"
+    subnet_id = aws_subnet.team-private.id
+    security_groups =[aws_security_group.allow_all.id]
+    key_name = "moffo-key"
+    tags = {
+      Name ="private-server"
+    }
+}
