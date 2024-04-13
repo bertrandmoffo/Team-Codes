@@ -14,12 +14,12 @@ resource "aws_network_acl" "public-nacl" {
   }
 
   ingress {
-    protocol   = "tcp"
+    protocol   = "-1"
     rule_no    = 100
     action     = "allow"
     cidr_block = "0.0.0.0/0"
-    from_port  = 22
-    to_port    = 22
+    from_port  = 0
+    to_port    = 0
   }
 
   tags = {
@@ -42,12 +42,12 @@ resource "aws_network_acl" "private-nacl" {
   }
 
   ingress {
-    protocol   = "tcp"
+    protocol   = "-1"
     rule_no    = 100
     action     = "allow"
     cidr_block = "20.0.0.0/16"
-    from_port  = 22
-    to_port    = 22
+    from_port  = 0
+    to_port    = 0
   }
 
   tags = {

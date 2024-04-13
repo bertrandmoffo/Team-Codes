@@ -5,9 +5,9 @@ resource "aws_security_group" "allow_all" {
 
   // Rule allowing ssh inbound traffic
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp" // This indicates ssh protocols
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1" // This indicates ssh protocols
     cidr_blocks = ["0.0.0.0/0"] // All source IPs
   }
 
